@@ -7,10 +7,12 @@
 	<style type="text/css">
 		body{
 			text-align: center;
-			padding: 18%;
-			background: url(https://t3.ftcdn.net/jpg/03/87/14/32/360_F_387143229_o1csbrN0ayLTF8Am6r9KEHtfxmFCsC5W.jpg);
+			background: url("https://t3.ftcdn.net/jpg/03/51/49/02/360_F_351490213_S7dVUfS6K6UFsmDOQIa0eySWD8mkiGm0.jpg"),fixed no-repeat;
 			background-size: cover;
-			background-repeat: no-repeat;
+		}
+		.group{
+			padding: 15%;
+
 		}
 		#message{
 			padding: 0.8%;
@@ -30,24 +32,70 @@
 			font-style: normal;
 			color: black;
 		}
+		.head{
+			color: white;
+			font-style: Poopins;
+			font-size: 50px;
+		}
+		#course{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+			width: 17%;
+
+		}
+		#male{
+			font-size: 18px;
+			color: white;
+		}
+		#female{
+			font-size: 18px;
+			color: white;
+		}
+		.input{
+			font-size: 15px;
+			color: white;
+		}
 	</style>
 </head>
 <body>
 	<h1 class="head"><b>Registration Page</b></h1>
-	<p><input placeholder="Enter mesaage" id="message"/></p>
-	<p><input placeholder="Enter message" id="password"/></p>
-	<button class="btn" onclick="user()">Submit</button>
+	<div class="group">
+	<p><input placeholder="Enter name" id="message"/></p>
+	<p><input placeholder="Enter password" id="password"/></p>
+	<p>
+	    <select id="course">
+			<option value="select course">select course</option>
+			<option value="mpcs">MPCS</option>
+			<option value="mec">MEC</option>
+			<option value="CEC">CEC</option>
+			<option value="cams">CAMS</option>
+			<option value="mscs">MSCS</option>
+
+		</select>
+	</p>
+	<p class="input">
+	<input type="radio" value="Male" name="gender" id="male" />Male
+	<input type="radio" value="Female" name="gender" id="female" />Female</p>
+    <button class="btn" onclick="user()">Submit</button>
+    </div>
     <script type="text/javascript">
     	function user(){
     		var message=document.getElementById("message").value
     		var password=document.getElementById("password").value
-    		console.log(message,password)
+    		var course=document.getElementById("course").value
+    		var gmale=document.getElementById("male").checked
+    		var gfemale=document.getElementById("female").checked
+    		if(gmale==true) var gender="male"
+    			else var gender="female"
+    		console.log(message,password,course,gender)
     	fetch("http://localhost:3000/newData",{
     		method:"POST",
     		headers:{
     			"Content-Type":"application/json"
     	   },
-    	   body:JSON.stringify({name:message,password:password}
+    	   body:JSON.stringify({name:message,password:password,course:course,gender:gender}
     	   	)
     	})
     	.then((res)=>{
