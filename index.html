@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			text-align: center;
+			padding: 18%;
+			background: url(https://t3.ftcdn.net/jpg/03/87/14/32/360_F_387143229_o1csbrN0ayLTF8Am6r9KEHtfxmFCsC5W.jpg);
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+		#message{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+		}
+		#password{
+		    padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;	
+		}
+		#btn{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="head"><b>Registration Page</b></h1>
+	<p><input placeholder="Enter mesaage" id="message"/></p>
+	<p><input placeholder="Enter message" id="password"/></p>
+	<button class="btn" onclick="user()">Submit</button>
+    <script type="text/javascript">
+    	function user(){
+    		var message=document.getElementById("message").value
+    		var password=document.getElementById("password").value
+    		console.log(message,password)
+    	fetch("http://localhost:3000/newData",{
+    		method:"POST",
+    		headers:{
+    			"Content-Type":"application/json"
+    	   },
+    	   body:JSON.stringify({name:message,password:password}
+    	   	)
+    	})
+    	.then((res)=>{
+    		console.log(res)
+    		if(res.status===200)
+    			alert("Registration successful")
+    	})
+    	.catch((err)=>{
+    		alert(err)
+    	})
+    }
+    </script>
+</body>
+</html>
